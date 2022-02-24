@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %} Sign In {% endblock title %}
+
+{% block content %}
+
+<div class="card mx-auto mt-24" style="width: 18rem;">
+    <div class="card-body">
+        <h5 class="card-title">Sign In Form</h5>
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="email" class="form-label">Email address</label>
+                <input type="email" name="email" class="form-control" id="email" placeholder="Email Address">
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Email address</label>
+                <input type="password" name="password" class="form-control" id="password" placeholder="Email Address">
+            </div>
+            <button type="submit" class="btn btn-primary">Sign In</button>
+        </form>
+    </div>
+</div>
+
+{% endblock content %}
