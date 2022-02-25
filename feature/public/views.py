@@ -1,15 +1,28 @@
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render, redirect
 from django.views import View
 
 from feature.public.forms import SignInForm
 
 
+def upload(request):
+    if request.method == "POST" and request.FILES["upload"]:
+        uploaded = request.FILES["upload"]
+        fss = FileSystemStorage()
+        file = fss.save(uploaded.name, uploaded)
+        file_url = fss.url(file)
+        return render(request, "public/upload.html", {"file_url": file_url})
+    return render(request, "public/upload.html")
+
+
 class SignInView(View):
     @staticmethod
     def get(request):
+        if request.user.is_authenticated:
+            return redirect("public:dashboard")
         return render(request, "public/sign_in.html")
 
     @staticmethod
