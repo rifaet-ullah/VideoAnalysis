@@ -8,16 +8,6 @@ from django.views import View
 from feature.public.forms import SignInForm
 
 
-def upload(request):
-    if request.method == "POST" and request.FILES["upload"]:
-        uploaded = request.FILES["upload"]
-        fss = FileSystemStorage()
-        file = fss.save(uploaded.name, uploaded)
-        file_url = fss.url(file)
-        return render(request, "public/upload.html", {"file_url": file_url})
-    return render(request, "public/upload.html")
-
-
 class SignInView(View):
     @staticmethod
     def get(request):
@@ -49,6 +39,18 @@ class DashboardView(LoginRequiredMixin, View):
     @staticmethod
     def get(request):
         return render(request, "public/dashboard.html")
+
+
+class UploadView(LoginRequiredMixin, View):
+    @staticmethod
+    def post(request):
+        if request.FILES["upload"]:
+            upload_file = request.FILES["upload"]
+            file_system_storage = FileSystemStorage()
+            file = file_system_storage.save(upload_file.name, upload_file)
+            file_url = file_system_storage.url(file)
+            return render(request, "public/dashboard.html", {"file_url": file_url})
+        return redirect("public:dashboard")
 
 
 def sign_out(request):
