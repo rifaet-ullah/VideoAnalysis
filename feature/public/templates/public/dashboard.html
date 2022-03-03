@@ -27,11 +27,8 @@
             <div class="container">
                 <!--<h4>Images</h4>-->
                 {% if file_url %}
-
                 <div class="w3-container">
-                    <h2>W3.CSS Modal Image</h2>
-
-                    <img src="{{ file_url }}" style="width:30%;cursor:zoom-in"
+                    <img src="{{ file_url }}" style="width:30%;cursor:pointer"
                          onclick="document.getElementById('modal01').style.display='block'">
 
                     <div id="modal01" class="w3-modal" onclick="this.style.display='none'">
@@ -41,7 +38,6 @@
                         </div>
                     </div>
                 </div>
-
 <!--                <img id="myImg" src="{{ file_url }}" class="img-fluid" style="width:200px;">-->
 <!--                &lt;!&ndash; The Modal &ndash;&gt;-->
 <!--                <div id="myModal" class="modal">-->
